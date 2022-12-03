@@ -1,0 +1,855 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>JakEast Hospitalist</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/color.css">
+
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+       <!-- <link rel="stylesheet" href="css/leaflet-measure.css">!-->
+        <style>
+        #map {
+            width: 680px;
+            height: 520px;
+        }
+        </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+
+    <div class="wrapper half_map">
+
+      	<header class="fix">
+            <div class="header shd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                                <a class="navbar-brand" href="index.html">
+                                    <img src="assets/images/logo2fix.png" alt="">
+                                </a>
+                                <button class="menu-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+                                    <span class="icon-spar"></span>
+                                    <span class="icon-spar"></span>
+                                    <span class="icon-spar"></span>
+                                </button>
+
+                                <div class="navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                            <li class="nav-item signin-btn">
+                                                <a href="index.html" class="nav-link">
+                                                </a>
+
+                                            </li>
+
+                                            <li class="nav-item signin-btn">
+                                                <a href="03_Home.html" class="nav-link">
+                                                </a>
+
+                                            </li>
+
+                                            <li class="nav-item signin-btn">
+                                                <a href="18_Half_Map.html" class="nav-link">   
+                                                </a>
+
+                                            </li>
+                                            
+                                        
+                                        
+                                    </ul>
+                                    <div class="d-inline my-2 my-lg-0">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item signin-btn">
+                                                <a href="index.html" class="nav-link">
+                                                    
+                                                    <span>Home</span>
+                                                </a>
+
+                                            </li>
+
+                                            <li class="nav-item signin-btn">
+                                                <a href="03_Home.html" class="nav-link">
+                                                    
+                                                    <span>Maps</span>
+                                                </a>
+
+                                            </li>
+
+                                            <li class="nav-item signin-btn">
+                                                <a href="18_Half_Map.html" class="nav-link">
+                                                    
+                                                    <span>Hospital</span>
+                                                </a>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a href="#" title="" class="close-menu"><i class="la la-close"></i></a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header><!--header end-->
+
+        <div class="popup" id="sign-popup">
+            <h3>Sign In to your Account</h3>
+            <div class="popup-form">
+                <form>
+                    <div class="form-field">
+                        <input type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-cp">
+                        <div class="form-field">
+                            <div class="input-field">
+                                <input type="checkbox" name="ccc" id="cc1">
+                                <label for="cc1">
+                                    <span></span>
+                                    <small>Remember me</small>
+                                </label>
+                            </div>
+                        </div>
+                        <a href="#" title="">Forgot Password?</a>
+                    </div><!--form-cp end-->
+                    <button type="submit" class="btn2">Sign In</button>
+                </form>
+                <a href="#" title="" class="fb-btn"> <i class="fa fa-facebook"></i>Sign In With Facebook</a>
+            </div>
+        </div><!--popup end-->
+
+        <div class="popup" id="register-popup">
+            <h3>Register</h3>
+            <div class="popup-form">
+                <form>
+                    <div class="form-field">
+                        <input type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-cp">
+                        <div class="form-field">
+                            <div class="input-field">
+                                <input type="checkbox" name="ccc" id="cc2">
+                                <label for="cc2">
+                                    <span></span>
+                                    <small>I agree with terms</small>
+                                </label>
+                            </div>
+                        </div>
+                        <a href="#" title="" class="signin-op">Have an account?</a>
+                    </div><!--form-cp end-->
+                    <button type="submit" class="btn2">Register</button>
+                </form>
+            </div>
+        </div><!--popup end-->
+
+        <section class="half-map-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-12">
+                        <div id="map-container" class="fullwidth-home-map">
+                            <div id="map">
+                            </div>
+                            <script src="js/qgis2web_expressions.js"></script>
+                            <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+                            <script src="js/leaflet.rotatedMarker.js"></script>
+                            <script src="js/leaflet.pattern.js"></script>
+                            <script src="js/leaflet-hash.js"></script>
+                            <script src="js/Autolinker.min.js"></script>
+                            <script src="js/rbush.min.js"></script>
+                            <script src="js/labelgun.min.js"></script>
+                            <script src="js/labels.js"></script>
+                            <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+                            <script src="js/leaflet-measure.js"></script>
+                            <script src="js/leaflet.markercluster.js"></script>
+                            <script src="js/leaflet-search.js"></script>
+                            <script src="data/Wilayah_Kecamatan_1.js"></script>
+                            <script src="data/RSdiJakartaTimur_2.js"></script>
+                            <script src="data/KantorCamat_3.js"></script>
+                            <script src="data/JarakRSterdekattiapKantorKecamatan_4.js"></script>
+                            <script>
+                            var map = L.map('map', {
+                                zoomControl:true, maxZoom:28, minZoom:1
+                            }).fitBounds([[-6.363938398261654,106.79507111880184],[-6.2112712663496215,107.00802562087674]]);
+                            var hash = new L.Hash(map);
+                            map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+                            var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+                            L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+                            var measureControl = new L.Control.Measure({
+                                position: 'topleft',
+                                primaryLengthUnit: 'meters',
+                                secondaryLengthUnit: 'kilometers',
+                                primaryAreaUnit: 'sqmeters',
+                                secondaryAreaUnit: 'hectares'
+                            });
+                            measureControl.addTo(map);
+                            document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+                            .innerHTML = '';
+                            document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+                            .className += ' fas fa-ruler';
+                            var bounds_group = new L.featureGroup([]);
+                            function setBounds() {
+                            }
+                            map.createPane('pane_GoogleMaps_0');
+                            map.getPane('pane_GoogleMaps_0').style.zIndex = 400;
+                            var layer_GoogleMaps_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                                pane: 'pane_GoogleMaps_0',
+                                opacity: 1.0,
+                                attribution: '',
+                                minZoom: 1,
+                                maxZoom: 28,
+                                minNativeZoom: 0,
+                                maxNativeZoom: 19
+                            });
+                            layer_GoogleMaps_0;
+                            map.addLayer(layer_GoogleMaps_0);
+                            function pop_Wilayah_Kecamatan_1(feature, layer) {
+                                var popupContent = '<table>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['qc_id'] !== null ? autolinker.link(feature.properties['qc_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">provinsi</th>\
+                                            <td>' + (feature.properties['provinsi'] !== null ? autolinker.link(feature.properties['provinsi'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kota</th>\
+                                            <td>' + (feature.properties['kota'] !== null ? autolinker.link(feature.properties['kota'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kecamatan</th>\
+                                            <td>' + (feature.properties['kecamatan'] !== null ? autolinker.link(feature.properties['kecamatan'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kodepos</th>\
+                                            <td>' + (feature.properties['kodepos'] !== null ? autolinker.link(feature.properties['kodepos'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                    </table>';
+                                layer.bindPopup(popupContent, {maxHeight: 400});
+                            }
+                    
+                            function style_Wilayah_Kecamatan_1_0(feature) {
+                                switch(String(feature.properties['kecamatan'])) {
+                                    case 'Cakung':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(246,239,247,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Cipayung':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(223,224,238,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Ciracas':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(200,209,229,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Duren Sawit':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(172,195,221,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Jatinegara':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(137,182,214,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Kramatjati':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(103,169,207,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Makasar':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(73,159,185,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Matraman':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(43,149,164,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Pasar Rebo':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(23,137,140,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    case 'Pulo Gadung':
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(12,122,115,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                    default:
+                                        return {
+                                    pane: 'pane_Wilayah_Kecamatan_1',
+                                    opacity: 1,
+                                    color: 'rgba(35,35,35,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'butt',
+                                    lineJoin: 'miter',
+                                    weight: 1.0, 
+                                    fill: true,
+                                    fillOpacity: 1,
+                                    fillColor: 'rgba(1,108,89,1.0)',
+                                    interactive: true,
+                                }
+                                        break;
+                                }
+                            }
+                            map.createPane('pane_Wilayah_Kecamatan_1');
+                            map.getPane('pane_Wilayah_Kecamatan_1').style.zIndex = 401;
+                            map.getPane('pane_Wilayah_Kecamatan_1').style['mix-blend-mode'] = 'normal';
+                            var layer_Wilayah_Kecamatan_1 = new L.geoJson(json_Wilayah_Kecamatan_1, {
+                                attribution: '',
+                                interactive: true,
+                                dataVar: 'json_Wilayah_Kecamatan_1',
+                                layerName: 'layer_Wilayah_Kecamatan_1',
+                                pane: 'pane_Wilayah_Kecamatan_1',
+                                onEachFeature: pop_Wilayah_Kecamatan_1,
+                                style: style_Wilayah_Kecamatan_1_0,
+                            });
+                            bounds_group.addLayer(layer_Wilayah_Kecamatan_1);
+                            map.addLayer(layer_Wilayah_Kecamatan_1);
+                            function pop_RSdiJakartaTimur_2(feature, layer) {
+                                var popupContent = '<table>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['qc_id'] !== null ? autolinker.link(feature.properties['qc_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['no.'] !== null ? autolinker.link(feature.properties['no.'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">nama rumah</th>\
+                                            <td>' + (feature.properties['nama rumah'] !== null ? autolinker.link(feature.properties['nama rumah'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kecamatan</th>\
+                                            <td>' + (feature.properties['kecamatan'] !== null ? autolinker.link(feature.properties['kecamatan'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kota</th>\
+                                            <td>' + (feature.properties['kota'] !== null ? autolinker.link(feature.properties['kota'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['latitude ('] !== null ? autolinker.link(feature.properties['latitude ('].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">link rumah</th>\
+                                            <td>' + (feature.properties['link rumah'] !== null ? autolinker.link(feature.properties['link rumah'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kontak rum</th>\
+                                            <td>' + (feature.properties['kontak rum'] !== null ? autolinker.link(feature.properties['kontak rum'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">alamat rum</th>\
+                                            <td>' + (feature.properties['alamat rum'] !== null ? autolinker.link(feature.properties['alamat rum'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">Gambar RS</th>\
+                                            <td>' + (feature.properties['Gambar RS'] !== null ? '<img src="images/' + String(feature.properties['Gambar RS']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                                        </tr>\
+                                    </table>';
+                                layer.bindPopup(popupContent, {maxHeight: 400});
+                            }
+                    
+                            function style_RSdiJakartaTimur_2_0() {
+                                return {
+                                    pane: 'pane_RSdiJakartaTimur_2',
+                            rotationAngle: 0.0,
+                            rotationOrigin: 'center center',
+                            icon: L.icon({
+                                iconUrl: 'markers/hospital-location (1).svg',
+                                iconSize: [34.199999999999996, 34.199999999999996]
+                            }),
+                                    interactive: true,
+                                }
+                            }
+                            map.createPane('pane_RSdiJakartaTimur_2');
+                            map.getPane('pane_RSdiJakartaTimur_2').style.zIndex = 402;
+                            map.getPane('pane_RSdiJakartaTimur_2').style['mix-blend-mode'] = 'normal';
+                            var layer_RSdiJakartaTimur_2 = new L.geoJson(json_RSdiJakartaTimur_2, {
+                                attribution: '',
+                                interactive: true,
+                                dataVar: 'json_RSdiJakartaTimur_2',
+                                layerName: 'layer_RSdiJakartaTimur_2',
+                                pane: 'pane_RSdiJakartaTimur_2',
+                                onEachFeature: pop_RSdiJakartaTimur_2,
+                                pointToLayer: function (feature, latlng) {
+                                    var context = {
+                                        feature: feature,
+                                        variables: {}
+                                    };
+                                    return L.marker(latlng, style_RSdiJakartaTimur_2_0(feature));
+                                },
+                            });
+                            var cluster_RSdiJakartaTimur_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+                                spiderfyDistanceMultiplier: 2});
+                            cluster_RSdiJakartaTimur_2.addLayer(layer_RSdiJakartaTimur_2);
+                    
+                            bounds_group.addLayer(layer_RSdiJakartaTimur_2);
+                            cluster_RSdiJakartaTimur_2.addTo(map);
+                            function pop_KantorCamat_3(feature, layer) {
+                                var popupContent = '<table>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['qc_id'] !== null ? autolinker.link(feature.properties['qc_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['namobj'] !== null ? autolinker.link(feature.properties['namobj'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['fgsgov'] !== null ? autolinker.link(feature.properties['fgsgov'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['luas'] !== null ? autolinker.link(feature.properties['luas'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['fcode'] !== null ? autolinker.link(feature.properties['fcode'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['remark'] !== null ? autolinker.link(feature.properties['remark'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['srs_id'] !== null ? autolinker.link(feature.properties['srs_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['lcode'] !== null ? autolinker.link(feature.properties['lcode'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['metadata'] !== null ? autolinker.link(feature.properties['metadata'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">kecamatan</th>\
+                                            <td>' + (feature.properties['kecamatan'] !== null ? autolinker.link(feature.properties['kecamatan'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">alamat</th>\
+                                            <td>' + (feature.properties['alamat'] !== null ? autolinker.link(feature.properties['alamat'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                    </table>';
+                                layer.bindPopup(popupContent, {maxHeight: 400});
+                            }
+                    
+                            function style_KantorCamat_3_0() {
+                                return {
+                                    pane: 'pane_KantorCamat_3',
+                            rotationAngle: 0.0,
+                            rotationOrigin: 'center center',
+                            icon: L.icon({
+                                iconUrl: 'markers/embassy.svg',
+                                iconSize: [34.199999999999996, 34.199999999999996]
+                            }),
+                                    interactive: true,
+                                }
+                            }
+                            map.createPane('pane_KantorCamat_3');
+                            map.getPane('pane_KantorCamat_3').style.zIndex = 403;
+                            map.getPane('pane_KantorCamat_3').style['mix-blend-mode'] = 'normal';
+                            var layer_KantorCamat_3 = new L.geoJson(json_KantorCamat_3, {
+                                attribution: '',
+                                interactive: true,
+                                dataVar: 'json_KantorCamat_3',
+                                layerName: 'layer_KantorCamat_3',
+                                pane: 'pane_KantorCamat_3',
+                                onEachFeature: pop_KantorCamat_3,
+                                pointToLayer: function (feature, latlng) {
+                                    var context = {
+                                        feature: feature,
+                                        variables: {}
+                                    };
+                                    return L.marker(latlng, style_KantorCamat_3_0(feature));
+                                },
+                            });
+                            bounds_group.addLayer(layer_KantorCamat_3);
+                            map.addLayer(layer_KantorCamat_3);
+                            function pop_JarakRSterdekattiapKantorKecamatan_4(feature, layer) {
+                                var popupContent = '<table>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['qc_id'] !== null ? autolinker.link(feature.properties['qc_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['namobj'] !== null ? autolinker.link(feature.properties['namobj'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['fgsgov'] !== null ? autolinker.link(feature.properties['fgsgov'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['luas'] !== null ? autolinker.link(feature.properties['luas'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['fcode'] !== null ? autolinker.link(feature.properties['fcode'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['remark'] !== null ? autolinker.link(feature.properties['remark'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['srs_id'] !== null ? autolinker.link(feature.properties['srs_id'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['lcode'] !== null ? autolinker.link(feature.properties['lcode'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['metadata'] !== null ? autolinker.link(feature.properties['metadata'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['kecamatan'] !== null ? autolinker.link(feature.properties['kecamatan'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <td colspan="2">' + (feature.properties['alamat'] !== null ? autolinker.link(feature.properties['alamat'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">HubName</th>\
+                                            <td>' + (feature.properties['HubName'] !== null ? autolinker.link(feature.properties['HubName'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                        <tr>\
+                                            <th scope="row">HubDist</th>\
+                                            <td>' + (feature.properties['HubDist'] !== null ? autolinker.link(feature.properties['HubDist'].toLocaleString()) : '') + '</td>\
+                                        </tr>\
+                                    </table>';
+                                layer.bindPopup(popupContent, {maxHeight: 400});
+                            }
+                    
+                            function style_JarakRSterdekattiapKantorKecamatan_4_0() {
+                                return {
+                                    pane: 'pane_JarakRSterdekattiapKantorKecamatan_4',
+                                    opacity: 1,
+                                    color: 'rgba(219,30,42,1.0)',
+                                    dashArray: '',
+                                    lineCap: 'round',
+                                    lineJoin: 'round',
+                                    weight: 3.0,
+                                    fillOpacity: 0,
+                                    interactive: true,
+                                }
+                            }
+                            map.createPane('pane_JarakRSterdekattiapKantorKecamatan_4');
+                            map.getPane('pane_JarakRSterdekattiapKantorKecamatan_4').style.zIndex = 404;
+                            map.getPane('pane_JarakRSterdekattiapKantorKecamatan_4').style['mix-blend-mode'] = 'normal';
+                            var layer_JarakRSterdekattiapKantorKecamatan_4 = new L.geoJson(json_JarakRSterdekattiapKantorKecamatan_4, {
+                                attribution: '',
+                                interactive: true,
+                                dataVar: 'json_JarakRSterdekattiapKantorKecamatan_4',
+                                layerName: 'layer_JarakRSterdekattiapKantorKecamatan_4',
+                                pane: 'pane_JarakRSterdekattiapKantorKecamatan_4',
+                                onEachFeature: pop_JarakRSterdekattiapKantorKecamatan_4,
+                                style: style_JarakRSterdekattiapKantorKecamatan_4_0,
+                            });
+                            bounds_group.addLayer(layer_JarakRSterdekattiapKantorKecamatan_4);
+                            map.addLayer(layer_JarakRSterdekattiapKantorKecamatan_4);
+                            var osmGeocoder = new L.Control.Geocoder({
+                                collapsed: true,
+                                position: 'topleft',
+                                text: 'Search',
+                                title: 'Testing'
+                            }).addTo(map);
+                            document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+                            .className += ' fa fa-search';
+                            document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+                            .title += 'Search for a place';
+                            var baseMaps = {};
+                            L.control.layers(baseMaps,{'<img src="legend/JarakRSterdekattiapKantorKecamatan_4.png" /> Jarak RS terdekat tiap Kantor Kecamatan': layer_JarakRSterdekattiapKantorKecamatan_4,'<img src="legend/KantorCamat_3.png" /> Kantor Camat': layer_KantorCamat_3,'<img src="legend/RSdiJakartaTimur_2.png" /> RS di Jakarta Timur': cluster_RSdiJakartaTimur_2,'Wilayah_Kecamatan<br /><table><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Cakung0.png" /></td><td>Cakung</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Cipayung1.png" /></td><td>Cipayung</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Ciracas2.png" /></td><td>Ciracas</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_DurenSawit3.png" /></td><td>Duren Sawit</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Jatinegara4.png" /></td><td>Jatinegara</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Kramatjati5.png" /></td><td>Kramatjati</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Makasar6.png" /></td><td>Makasar</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_Matraman7.png" /></td><td>Matraman</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_PasarRebo8.png" /></td><td>Pasar Rebo</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_PuloGadung9.png" /></td><td>Pulo Gadung</td></tr><tr><td style="text-align: center;"><img src="legend/Wilayah_Kecamatan_1_10.png" /></td><td></td></tr></table>': layer_Wilayah_Kecamatan_1,"Google Maps": layer_GoogleMaps_0,}).addTo(map);
+                            setBounds();
+                            var i = 0;
+                            layer_RSdiJakartaTimur_2.eachLayer(function(layer) {
+                                var context = {
+                                    feature: layer.feature,
+                                    variables: {}
+                                };
+                                layer.bindTooltip((layer.feature.properties['nama rumah'] !== null?String('<div style="color: #323232; font-size: 8pt; font-weight: bold; font-family: \'KG Corner of the Sky\', sans-serif;">' + layer.feature.properties['nama rumah']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_RSdiJakartaTimur_2'});
+                                labels.push(layer);
+                                totalMarkers += 1;
+                                  layer.added = true;
+                                  addLabel(layer, i);
+                                  i++;
+                            });
+                            map.addControl(new L.Control.Search({
+                                layer: layer_RSdiJakartaTimur_2,
+                                initial: false,
+                                hideMarkerOnCollapse: true,
+                                propertyName: 'nama rumah'}));
+                            document.getElementsByClassName('search-button')[0].className +=
+                             ' fa fa-binoculars';
+                            resetLabels([layer_RSdiJakartaTimur_2]);
+                            map.on("zoomend", function(){
+                                resetLabels([layer_RSdiJakartaTimur_2]);
+                            });
+                            map.on("layeradd", function(){
+                                resetLabels([layer_RSdiJakartaTimur_2]);
+                            });
+                            map.on("layerremove", function(){
+                                resetLabels([layer_RSdiJakartaTimur_2]);
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="widget-property-search">
+                            <form action="#" class="row banner-search">
+                            </form>
+                        </div><!--widget widget-property-searche end-->
+                        <div class="listing-directs">
+                            <div class="list-head">
+                                <div class="sortby">
+                                    <span>Sort by:</span>
+                                    <div class="drop-menu">
+                                        <div class="select">
+                                            <span>Duren Sawit</span>
+                                            <i class="la la-caret-down"></i>
+                                        </div>
+                                        <input type="hidden" name="gender">
+                                        <ul class="dropeddown">
+                                            <li><a href="18_Half_Map.html">ALL</a></li>
+                                            <li><a href="cakung.html">Cakung</a></li>
+                                            <li><a href="cipayung.html">Cipayung</a></li>
+                                            <li><a href="ciracas.html">Ciracas</a></li>
+                                            <li><a href="duren_sawit.html">Duren Sawit</a></li>
+                                            <li><a href="jatinegara.html">Jatinegara</a></li>
+                                            <li><a href="kramat_jati.html">Kramat Jati</a></li>
+                                            <li><a href="makasar.html">Makasar</a></li>
+                                            <li><a href="matraman.html">Matraman</a></li>
+                                            <li><a href="pasar_rebo.html">Pasar Rebo</a></li>
+                                            <li><a href="pulo_gadung.html">Pulo Gadung</a></li> 
+                                        </ul>
+                                    </div>
+                                </div><!--sortby end-->
+                               
+                            </div><!--list-head end-->
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="grid-view-tab1" role="tabpanel" aria-labelledby="grid-view-tab1">
+                                    <div class="list_products">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="card">
+                                                    <a href="https://rumahsakitislam.com/" title="">
+                                                        <div class="img-block">
+                                                            <div class="overlay"></div>
+                                                            <img src="assets/images/Duren Sawit_RS Islam Jakarta Pondok Kopi.jpg" alt="" class="img-fluid" style="width:370px;height:295px;">
+                                                            <div class="rate-info">
+                                                              
+                                                                <span>Duren Sawit</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="card-body">
+                                                        <a href="https://rumahsakitislam.com/" title="">
+                                                            <h3>RS Islam Pondok Kopi</h3>
+                                                            <p>
+                                                                <i class="la la-map-marker"></i>Jl. Nusa Indah Raya, RT.2/RW.1, Pd. Kopi, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13460
+                                                            </p>
+                                                        </a>
+                                                        <ul>
+                                                            <i class="la la-phone-square"></i>Telp : (021)8630654
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        
+                                                        <a href="#" class="pull-right">
+                                                            <i></i> Jakarta Timur</a>
+                                                    </div>
+                                                    <a href="https://rumahsakitislam.com/" title="" class="ext-link"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="card">
+                                                    <a href="http://www.bundaaliyah.com/" title="">
+                                                        <div class="img-block">
+                                                            <div class="overlay"></div>
+                                                            <img src="assets/images/Duren Sawit_RSIA Bunda Aliyah.jpg" alt="" class="img-fluid" style="width:370px;height:295px;">
+                                                            <div class="rate-info">
+                                                               
+                                                                <span>Duren Sawit</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="card-body">
+                                                        <a href="http://www.bundaaliyah.com/" title="">
+                                                            <h3>RSIA Bunda Aliyah</h3>
+                                                            <p>
+                                                                <i class="la la-map-marker"></i>Jl. Pahlawan Revolusi No.100, RT.4/RW.3, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13430
+                                                            </p>
+                                                        </a>
+                                                        <ul>
+                                                            <i class="la la-phone-square"></i>Telp : (021)86602525
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                     
+                                                        <a href="#" class="pull-right">
+                                                            <i></i> Jakarta Timur</a>
+                                                    </div>
+                                                    <a href="http://www.bundaaliyah.com/" title="" class="ext-link"></a>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div><!--list_products end-->
+                                    
+                                </div>
+                               
+                            </div><!--tab-content end-->
+                            
+                        </div><!--listing-directs end-->
+                    </div>
+                </div>
+            </div>
+        </section><!--half-map-sec end-->
+
+    </div><!--wrapper end-->
+
+
+
+
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/html5lightbox.js"></script>
+    <script src="assets/js/scripts.js"></script>
+
+    <!-- Maps 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVwc4veKudU0qjYrLrrQXacCkDkcy3AeQ"></script>
+    <script src="assets/js/map-cluster/infobox.min.js"></script>
+    <script src="assets/js/map-cluster/markerclusterer.js"></script>
+    <script src="assets/js/map-cluster/maps.js"></script>
+-->
+
+
+</body>
+
+</html>
